@@ -1,0 +1,9 @@
+- hosts: all
+  remote_user: ec2-user
+  become: yes
+  vars_files:
+    vault-pass.yaml
+  tasks:
+  - name:  trying out echo cmd
+    debug:
+      msg: "hello, my username is {{username}} & pass is {{password}}"

@@ -1,0 +1,27 @@
+- hosts: tomcat
+  remote_user: ec2-user
+  become: yes
+  vars:
+    tomcat_port: 7788
+  tasks:
+  - name: upgrade all packages
+    yum:
+      name: '*'
+      state: latest
+  - name: installing java 
+    yum:
+      name: java-1.8.0-openjdk
+      state: present
+  - name: downloading tomcat
+    get_url:
+      url: https://downloads.apache.org/tomcat/tomcat-10/v10.1.18/bin/apache-tomcat-10.1.18.tar.gz.sha512
+      dest: /opt
+      mode: '777'
+  - name: extract tar file
+    unarchive:
+      src: /opt/apache-tomcat-10.1.18.tar.gz.sha512
+      dest: /opt
+      remote_src: yes
+      mode: '777'
+  - name: starting tomcat
+    ansible.builtin.shell: nohup /opt/apac

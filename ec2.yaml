@@ -1,0 +1,13 @@
+- hosts: localhost
+  remote_user: ec2-user
+  become: yes
+  tasks:
+  - name: creating EC2
+    ec2:
+      key_name: 
+      instance_type: t2.micro
+      image: ami-
+      region: "ap-south-1"
+      count: 1
+      vpc_subnet_id: subnet-
+      assign_public_ip: yes
